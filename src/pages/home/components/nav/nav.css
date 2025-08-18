@@ -1,0 +1,10 @@
+.desktopNav{
+    display: flex;
+}
+
+@media screen and (max-width: 840px) {
+    .desktopNav{
+        display: none !important;
+        
+    }
+}

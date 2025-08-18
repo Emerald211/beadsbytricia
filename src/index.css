@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-spinner .ant-spin-dot-item {
+  @apply bg-[#F8B466]; /* Use Tailwind's bg-color utility to apply custom color */
+}

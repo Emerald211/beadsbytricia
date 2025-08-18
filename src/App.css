@@ -1,0 +1,9 @@
+.showSidebar {
+	display: block;
+}
+
+@media screen and (max-width: 768px) {
+	.showSidebar {
+		display: none;
+    }
+}
