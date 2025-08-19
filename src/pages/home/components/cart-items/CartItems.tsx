@@ -104,7 +104,7 @@ const CartItems = () => {
 				<div className='flex-1 overflow-y-auto px-6 py-4'>
 					<div className='space-y-4'>
 						{cartItems?.map((eachItem) => {
-							const { name, category, size, price, quantity, id, photoURL } = eachItem
+							const { name, size, price, quantity, id, photoURL } = eachItem
 							const isSelected = selectedItems.includes(id)
 							return (
 								<div key={id} className='bg-white rounded-lg p-4 shadow-sm border border-gray-200'>
