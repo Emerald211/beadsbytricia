@@ -10,7 +10,7 @@ const WomenClothing = () => {
 	});
   return (
     <div className=' flex flex-col justify-center items-center px-12 mt-12 text-main'>
-    <h1 className=' font-serrat text-2xl font-bold'>WOMEN CLOTHING</h1>
+    <h1 className=' font-serrat text-2xl font-bold'>WOMEN ACCEESORIES</h1>
 
     <div className=' flex justify-center items-center flex-wrap gap-2 py-12 '>
         {sortedProducts?.map((product) => {

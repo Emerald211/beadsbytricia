@@ -68,7 +68,7 @@ const Nav = () => {
 									What's new
 								</Link>
 								{/* Hover Dropdown */}
-								<div className='absolute hidden cursor-pointer group-hover:flex flex-col mt-0 w-[200px]  font-serrat gap-5 top-full left-0 bg-white p-4 shadow-lg transition-all duration-200'>
+								<div className='absolute z-40 hidden cursor-pointer group-hover:flex flex-col mt-0 w-[200px]  font-serrat gap-5 top-full left-0 bg-white p-4 shadow-lg transition-all duration-200'>
 									<p onClick={() => navigate('/new-arrival')}>New Arrivals</p>
 									<p onClick={() => navigate('/trending')}>Trending</p>
 								</div>
@@ -98,11 +98,11 @@ const Nav = () => {
 									<p onClick={() => navigate('/men-accesories')}>
 										Men's Accessories
 									</p> */}
-									<p>Bracelet stacks</p>
-									<p>Neck candies</p>
-									<p>Groom’s/Owambe sets</p>
-									<p>Walking sticks</p>
-									<p></p>
+									<p onClick={() => navigate('/bracelet-stacks')}>Bracelet stacks</p>
+									<p onClick={() => navigate('/neck-candies')}>Neck candies</p>
+									<p  onClick={() => navigate('/grooms-owanbe-sets')}>Groom’s/Owambe sets</p>
+									<p onClick={() => navigate('/walking-sticks')}>Walking sticks</p>
+									
 								</div>
 							</li>
 
@@ -118,12 +118,12 @@ const Nav = () => {
 										Women's Accessories
 									</p> */}
 
-									<p>Statement earrings</p>
-									<p>Beaded bags</p>
-									<p>Bracelet stacks</p>
-									<p>Bridal</p>
-									<p>Statement throw-ons</p>
-									<p>Gemstone pendants</p>
+									<p onClick={() => navigate('statement-earrings')}>Statement earrings</p>
+									<p onClick={() => navigate('beaded-bags')}>Beaded bags</p>
+									<p onClick={() => navigate('bracelet-stacks')}>Bracelet stacks</p>
+									<p onClick={() => navigate('bridal')}>Bridal</p>
+									<p onClick={() => navigate('statement-throwon')}>Statement throw-ons</p>
+									<p onClick={() => navigate('gemstone-pendant')}>Gemstone pendants</p>
 								</div>
 							</li>
 							{/* <li className="relative group">
@@ -136,7 +136,7 @@ const Nav = () => {
 								<Link to='#' className='underline-custom'>
 									Contact us
 								</Link>
-								<div className='absolute hidden cursor-pointer group-hover:flex flex-col mt-0 w-[200px]  font-serrat gap-5 top-full left-0 bg-white p-4 shadow-lg transition-all duration-200'>
+								<div className='absolute z-40 hidden cursor-pointer group-hover:flex flex-col mt-0 w-[200px]  font-serrat gap-5 top-full left-0 bg-white p-4 shadow-lg transition-all duration-200'>
 									<p onClick={() => navigate('/contact')}>
 										Contact Information
 									</p>

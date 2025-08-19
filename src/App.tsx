@@ -31,7 +31,6 @@ import MenClothing from './pages/home/components/men/men-Clothing/MenClothing';
 import WomenClothing from './pages/home/components/men/women/women-clothing/WomenClothing';
 import Shop from './pages/home/shop/Shop';
 import Clothing from './pages/home/components/clothing/Clothing ';
-import Bag from './pages/home/components/bags/Bags';
 import Shoes from './pages/home/components/shoes/Shoes';
 import UserLogin from './pages/home/login/Userlogin';
 import { UserContext } from './utils/context/user/UserContext';
@@ -47,6 +46,15 @@ import MenAccesories from './pages/home/components/men/men-accesories/MenAccesor
 import WomenAccesories from './pages/home/components/men/women/women-accesories/WomenAccesories';
 import Contact from './pages/home/contact/Contact';
 import Profile from './pages/home/components/profile/Profile';
+import Bracelet from './pages/home/components/Bracelet-stacks/Bracelet';
+import NeckCandies from './pages/home/components/Neck-candles/NeckCandies';
+import Groom from './pages/home/components/groom/Groom';
+import WalkingStick from './pages/home/components/walking-sticks/WalkingStick';
+import Earring from './pages/home/components/statement-earring/Earring';
+import BeadedBag from './pages/home/components/BeadedBag/BeadedBag';
+import Bridal from './pages/home/components/Bridal/Bridal';
+import ThrowOn from './pages/home/components/Statement-throwon/ThrowOn';
+import Gemstone from './pages/home/components/Gemstone/Gemstone';
 const AdminDashboard = React.lazy(
 	() => import('./pages/admin/dashboard/dashboard')
 );
@@ -161,7 +169,15 @@ function App() {
 				<Route path='shop' element={<Shop />} />
 				<Route path='checkout' element={<Checkout />} />
 				<Route path='clothing' element={<Clothing />} />
-				<Route path='bag' element={<Bag />} />
+				<Route path='bracelet-stacks' element={<Bracelet />} />
+				<Route path='beaded-bags' element={<BeadedBag />} />
+				<Route path='bridal' element={<Bridal />} />
+				<Route path='gemstone-pendant' element={<Gemstone />} />
+				<Route path='statement-throwon' element={<ThrowOn />} />
+				<Route path='neck-candies' element={<NeckCandies />} />
+				<Route path='grooms-owanbe-sets' element={<Groom />} />
+				<Route path='walking-sticks' element={<WalkingStick />} />
+				<Route path='statement-earrings' element={<Earring />} />
 				<Route path='shoes' element={<Shoes />} />
 				<Route path='new-arrival' element={<NewArrival />} />
 				<Route path='trending' element={<Trending />} />

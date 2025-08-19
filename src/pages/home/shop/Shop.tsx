@@ -174,18 +174,7 @@ const Shop = () => {
 
 					</div>
 
-					<div className='mb-8'>
-						<h3 className='text-lg font-semibold mb-4 text-gray-800'>Brands</h3>
-						<ul className='space-y-3'>
-							{['Nike', 'Adidas', 'Puma', 'New Balance'].map((brand) => (
-								<li
-									key={brand}
-									className='text-sm text-gray-600 hover:text-gray-800 cursor-pointer py-1'>
-									{brand}
-								</li>
-							))}
-						</ul>
-					</div>
+				
 
 					<div className='mb-8'>
 						<h3 className='text-lg font-semibold mb-4 text-gray-800'>Size</h3>

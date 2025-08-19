@@ -3,15 +3,15 @@ import { AdminDashboardContext } from "../../../../utils/context/admin-state-con
 import { AdminDashboardProps } from "../../../../utils/context/admin-state-context/types/AdminTypes";
 import ProductCard from "../product-card/ProductCard";
 
-const Bag = () => {
+const NeckCandies = () => {
   const { products } = useContext(AdminDashboardContext) as AdminDashboardProps;
 
   const filterProduct = products?.filter(
-    (product) => product.category === "Bags"
+    (product) => product.category === "Neck candies "
   );
   return (
-    <div className=" px-12 pb-12 flex items-center justify-center flex-col">
-      <h1 className=" mt-12 font-bold text-3xl">Bag</h1>
+    <div className=" px-12 font-poppins pb-12 flex items-center justify-center flex-col">
+      <h1 className=" mt-12 font-bold text-3xl">Neck Candies</h1>
 
       <div className=" flex flex-wrap gap-4 p-10 m-10 items-center justify-center">
         {filterProduct?.map((product) => (
@@ -31,4 +31,4 @@ const Bag = () => {
   );
 };
 
-export default Bag;
+export default NeckCandies;
