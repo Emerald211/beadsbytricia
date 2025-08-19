@@ -99,7 +99,7 @@ const PersonalInformation = () => {
 
       <form
         onSubmit={handleSubmit(UpdateProfile)}
-        className="w-[100%] flex items-center justify-between p-5 md:flex-row md:flex-wrap flex-col gap-5 mt-12"
+        className="w-[100%] flex  justify-between p-5 md:flex-col md:flex-wrap flex-col gap-5 mt-12"
       >
         <Controller
           name="firstName"
