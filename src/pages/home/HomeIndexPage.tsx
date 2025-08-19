@@ -107,7 +107,7 @@ const HomeIndexPage = () => {
 
 				<div className='relative flex justify-center items-center'>
 					<img
-						src='/src/assets/SaveClip.App_481994610_18385190431136625_1014949194919151044_n.jpg'
+						src='/SaveClip.App_481994610_18385190431136625_1014949194919151044_n.jpg'
 						alt='Styled model in agbada'
 						className='w-full h-full object-cover rounded-xl shadow-lg'
 					/>
