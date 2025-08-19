@@ -145,6 +145,7 @@ const AddNewProduct = () => {
 				<Controller
 					name='description'
 					control={control}
+					
 					rules={{ required: 'Description is required' }}
 					render={({ field }) => (
 						<div className='flex flex-col'>

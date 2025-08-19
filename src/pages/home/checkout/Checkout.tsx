@@ -46,7 +46,6 @@ const Checkout = () => {
 	const [couponCode, setCouponCode] = useState('');
 	const navigate = useNavigate();
 	const swiperRef = useRef<SwiperCore| null>(null);
-	const [activeIndex, setActiveIndex] = useState(0);
 	const { products } = useContext(AdminDashboardContext) as AdminDashboardProps;
 	const goToNextSlide = () => {
 		swiperRef.current?.slideNext();

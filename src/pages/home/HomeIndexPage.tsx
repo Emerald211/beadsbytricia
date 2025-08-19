@@ -4,14 +4,12 @@ import SwiperCore from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'; // Import modules directly from 'swiper'
 import 'swiper/swiper-bundle.css';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { Button, Input } from 'antd';
-import { LeftOutlined, MailOutlined, RightOutlined } from '@ant-design/icons';
+import {  useForm } from 'react-hook-form';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { AdminDashboardContext } from '../../utils/context/admin-state-context/AdminContext';
 import { AdminDashboardProps } from '../../utils/context/admin-state-context/types/AdminTypes';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import CategoryDisplayCard from './components/category-card/CategoryCard';
 import PromoBanner from './components/promo/Promo';
 
 interface EmailSubscriberProps {
@@ -44,13 +42,17 @@ const HomeIndexPage = () => {
 	const navigate = useNavigate();
 
 	const {
-		control,
+	
 
 		formState: { errors },
 	} = useForm<EmailSubscriberProps>();
 
+	console.log(errors);
 	const goToNextSlide = () => {
 		swiperRef.current?.slideNext();
+
+		
+		
 	};
 
 	const goToPrevSlide = () => {
