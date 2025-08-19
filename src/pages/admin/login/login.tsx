@@ -87,15 +87,7 @@ const AdminLogin = () => {
           </h1>
           {loginType === false && <div className="h-[2px] rounded-3xl w-full bg-blue-800"></div>}
         </div>
-        <div
-          onClick={() => SwitchLoginMethod(true)}
-          className="cursor-pointer flex flex-col items-center"
-        >
-          <h1 className="px-3 py-2 md:py-3 text-sm md:text-base hover:text-blue-600 hover:bg-slate-200 rounded-md">
-            Create New Admin User
-          </h1>
-          {loginType === true && <div className="h-[2px] rounded-3xl w-full bg-blue-800"></div>}
-        </div>
+     
       </div>
 
       <form
