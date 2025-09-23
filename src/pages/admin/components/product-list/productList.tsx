@@ -21,7 +21,7 @@ interface DataType {
 	status: string[];
 }
 
-const defaultImage = 'https://via.placeholder.com/150';
+
 
 const mapProductsToDataType = (products: Product[]): DataType[] => {
 	return products.map((product) => ({
@@ -29,7 +29,7 @@ const mapProductsToDataType = (products: Product[]): DataType[] => {
 		id: product.id,
 		name: product.name,
 		price: product.price,
-		photoURLs: product.photoURLs,
+		photoURLs: product.photoURLs ,
 		category: product.category,
 		status: Array.isArray(product.status) ? product.status : [product.status],
 	}));
