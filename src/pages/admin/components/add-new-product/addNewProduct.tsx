@@ -9,7 +9,7 @@ import {
 	Image,
 } from 'antd';
 import { useState } from 'react';
-import { Controller, useForm, SubmitHandler, useWatch } from 'react-hook-form';
+import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 import { firestore, storage } from '../../../../utils/firebase/firebaseConfig';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';

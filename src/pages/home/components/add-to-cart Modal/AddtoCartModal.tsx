@@ -43,9 +43,9 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 	// state for selected color & length
 	const [selectedColor, setSelectedColor] = useState<string | null>(null);
 	const [selectedLength, setSelectedLength] = useState<string | null>(null);
-	const [showAllColors, setShowAllColors] = useState(false);
+	const [showAllColors] = useState(false);
 	const [showColorModal, setShowColorModal] = useState(false);
-	const [customLength, setCustomLength] = useState<string>('');
+	
 
 	const ColorOptions = [
 		// Basics
