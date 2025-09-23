@@ -17,7 +17,7 @@ const Trending = () => {
 
 			<div className=' flex flex-wrap gap-4 mt-12 items-center justify-center'>
 				{trendingProducts?.map((product) => {
-					const { id, name, price, category, photoURL, size, quantity } =
+					const { id, name, price, category, photoURLs, size, quantity } =
 						product;
 					return (
 						<ProductCard
@@ -25,7 +25,7 @@ const Trending = () => {
 							name={name}
 							price={price}
 							category={category}
-							photoURL={photoURL}
+							photoURLs={photoURLs}
 							id={id}
 							size={size}
 							quantity={quantity}

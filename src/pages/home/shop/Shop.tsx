@@ -239,7 +239,7 @@ const Shop = () => {
 
 					<div className='flex justify-center flex-wrap gap-2'>
 						{displayedProducts.slice(0, itemsToShow).map((product) => {
-							const { id, name, price, category, photoURL, size, quantity } =
+							const { id, name, price, category, photoURLs, size, quantity } =
 								product;
 							return (
 								<ProductCard
@@ -247,7 +247,7 @@ const Shop = () => {
 									name={name}
 									price={price}
 									category={category}
-									photoURL={photoURL}
+									photoURLs={photoURLs}
 									id={id}
 									size={size}
 									quantity={quantity}

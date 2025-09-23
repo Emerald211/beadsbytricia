@@ -6,8 +6,10 @@ export type Cart = {
     quantity: number;
     category: string;
     status: string;
-    photoURL?: string;
+    photoURLs?: string[];
     id: string
     orderNumber?: string;
+    color: string | null,
+    length: string | null,
    
 };

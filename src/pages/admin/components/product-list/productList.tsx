@@ -16,7 +16,7 @@ interface DataType {
 	id: string;
 	name: string;
 	price: number;
-	photoURL: string;
+	photoURLs: string[] | undefined;
 	category: string;
 	status: string[];
 }
@@ -29,7 +29,7 @@ const mapProductsToDataType = (products: Product[]): DataType[] => {
 		id: product.id,
 		name: product.name,
 		price: product.price,
-		photoURL: product.photoURL || defaultImage,
+		photoURLs: product.photoURLs,
 		category: product.category,
 		status: Array.isArray(product.status) ? product.status : [product.status],
 	}));
@@ -98,9 +98,9 @@ const ProductList: React.FC = () => {
 			title: 'Image',
 			dataIndex: 'image',
 			key: 'image',
-			render: (_, { photoURL }) => (
+			render: (_, { photoURLs }) => (
 				<img
-					src={photoURL}
+					src={photoURLs && photoURLs[0]}
 					alt='Product'
 					style={{ width: '50px', height: '50px', objectFit: 'cover' }}
 				/>

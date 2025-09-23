@@ -212,7 +212,7 @@ const Checkout = () => {
 							{/* Cart Items */}
 							<div className='space-y-4'>
 								{cartItems?.map((eachItem) => {
-									const { name, category, size, price, quantity, id, photoURL } = eachItem;
+									const { name, category, size, price, quantity, id, photoURLs } = eachItem;
 
 									return (
 										<div key={id} className='flex items-center gap-4 p-4 border border-gray-200 rounded-xl'>
@@ -221,7 +221,7 @@ const Checkout = () => {
 											{/* Product Image */}
 											<div className='relative'>
 												<div
-													style={{ backgroundImage: `url(${photoURL})` }}
+													style={{ backgroundImage: `url(${photoURLs && photoURLs[0]})` }}
 													className='w-20 h-20 bg-gray-200 bg-cover bg-center rounded-lg'
 												></div>
 												<button
@@ -393,7 +393,7 @@ const Checkout = () => {
 							},
 						}}>
 						{products?.map((product) => {
-							const { id, name, price, category, photoURL, size, quantity } =
+							const { id, name, price, category, photoURLs, size, quantity } =
 								product;
 							return (
 								<SwiperSlide key={id} className='flex justify-center items-center '>
@@ -402,7 +402,7 @@ const Checkout = () => {
 										name={name}
 										price={price}
 										category={category}
-										photoURL={photoURL}
+										photoURLs={photoURLs}
 										id={id}
 										size={size}
 										quantity={quantity}

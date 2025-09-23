@@ -14,14 +14,14 @@ const WomenClothing = () => {
 
     <div className=' flex justify-center items-center flex-wrap gap-2 py-12 '>
         {sortedProducts?.map((product) => {
-            const { id, name, price, category, photoURL, size, quantity } = product;
+            const { id, name, price, category, photoURLs, size, quantity } = product;
             return (
                 <ProductCard
                     key={id}
                     name={name}
                     price={price}
                     category={category}
-                    photoURL={photoURL}
+                    photoURLs={photoURLs}
                     id={id}
                     size={size}
                     quantity={quantity}

@@ -149,7 +149,7 @@ const HomeIndexPage = () => {
 							},
 						}}>
 						{products?.map((product) => {
-							const { id, name, price, category, photoURL, size, quantity } =
+							const { id, name, price, category, photoURLs, size, quantity } =
 								product;
 							return (
 								<SwiperSlide key={id} className='flex justify-center items-center '>
@@ -158,7 +158,7 @@ const HomeIndexPage = () => {
 										name={name}
 										price={price}
 										category={category}
-										photoURL={photoURL}
+										photoURLs={photoURLs}
 										id={id}
 										size={size}
 										quantity={quantity}
@@ -193,7 +193,7 @@ const HomeIndexPage = () => {
 			<section className=' mt-2  flex justify-center items-center flex-col'>
 				<div className=' mt-4 md:mt-12 flex justify-center flex-wrap gap-3 '>
 					{products?.slice(0, 8).map((product) => {
-						const { id, name, price, category, photoURL, size, quantity } =
+						const { id, name, price, category, photoURLs, size, quantity } =
 							product;
 						return (
 							<ProductCard
@@ -201,7 +201,7 @@ const HomeIndexPage = () => {
 								name={name}
 								price={price}
 								category={category}
-								photoURL={photoURL}
+								photoURLs={photoURLs}
 								id={id}
 								size={size}
 								quantity={quantity}

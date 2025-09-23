@@ -135,7 +135,7 @@ const OrderHistory: React.FC = () => {
 								key={eachItem.id}
 								className='w-full flex mt-5 border-t-2 px-6 py-4'>
 								<div
-									style={{ backgroundImage: `url(${eachItem.photoURL})` }}
+									style={{ backgroundImage: `url(${eachItem.photoURLs && eachItem.photoURLs[0]})` }}
 									className='image w-[150px] h-[150px] bg-slate-300 bg-cover bg-no-repeat relative group'></div>
 								<div className='w-full px-5 relative'>
 									<h6 className='font-bold absolute top-2 right-5'>

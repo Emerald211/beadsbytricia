@@ -9,7 +9,7 @@ import {
 	Image,
 } from 'antd';
 import { useState } from 'react';
-import { Controller, useForm, SubmitHandler } from 'react-hook-form';
+import { Controller, useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { firestore, storage } from '../../../../utils/firebase/firebaseConfig';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
@@ -22,7 +22,9 @@ interface AddNewProductProps {
 	category: string;
 	gender: string;
 	status: string;
-	photo: UploadFile<unknown> | null; // Adjusted to allow null for no file selected
+	photos: UploadFile<unknown>[] | null;
+	colors?: string[];
+	lengths?: string[];
 }
 
 const ProductCategory = [
@@ -42,28 +44,89 @@ const ProductStatus = ['IN-STOCK', 'OUT-OF-STOCK'];
 
 const Gender = ['MALE', 'FEMALE'];
 
+const ColorOptions = [
+	// Basics
+	{ name: 'Black', value: 'black' },
+	{ name: 'White', value: 'white' },
+	{ name: 'Gray', value: 'gray' },
+	{ name: 'Silver', value: 'silver' },
+	{ name: 'Gold', value: 'gold' },
+	{ name: 'Rose Gold', value: 'rose-gold' },
+	{ name: 'Platinum', value: 'platinum' },
+
+	// Natural / Earth tones
+	{ name: 'Brown', value: 'brown' },
+	{ name: 'Beige', value: 'beige' },
+	{ name: 'Tan', value: 'tan' },
+	{ name: 'Khaki', value: 'khaki' },
+	{ name: 'Olive', value: 'olive' },
+
+	// Reds & Pinks
+	{ name: 'Red', value: 'red' },
+	{ name: 'Burgundy', value: 'burgundy' },
+	{ name: 'Maroon', value: 'maroon' },
+	{ name: 'Pink', value: 'pink' },
+	{ name: 'Rose Pink', value: 'rose-pink' },
+
+	// Purples
+	{ name: 'Purple', value: 'purple' },
+	{ name: 'Violet', value: 'violet' },
+	{ name: 'Lavender', value: 'lavender' },
+
+	// Blues
+	{ name: 'Blue', value: 'blue' },
+	{ name: 'Navy', value: 'navy' },
+	{ name: 'Sky Blue', value: 'sky-blue' },
+	{ name: 'Turquoise', value: 'turquoise' },
+	{ name: 'Teal', value: 'teal' },
+
+	// Greens
+	{ name: 'Green', value: 'green' },
+	{ name: 'Emerald Green', value: 'emerald-green' },
+	{ name: 'Mint Green', value: 'mint-green' },
+	{ name: 'Lime', value: 'lime' },
+
+	// Warm tones
+	{ name: 'Yellow', value: 'yellow' },
+	{ name: 'Mustard', value: 'mustard' },
+	{ name: 'Orange', value: 'orange' },
+	{ name: 'Coral', value: 'coral' },
+
+	// Neutrals / Soft tones
+	{ name: 'Ivory', value: 'ivory' },
+	{ name: 'Cream', value: 'cream' },
+	{ name: 'Champagne', value: 'champagne' },
+];
+
+const LengthOptions = ['10cm (Baby size)', '16cm', '18cm', '20cm'];
+
 const AddNewProduct = () => {
-	const { control, handleSubmit, reset } = useForm<AddNewProductProps>();
+	const { control, handleSubmit, reset, watch } = useForm<AddNewProductProps>();
+	const selectedCategory = watch('category');
 	const [preview, setPreview] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 
+	
+
 	const onSubmit: SubmitHandler<AddNewProductProps> = async (data) => {
 		setLoading(true);
-		console.log('Form submitted:', data);
 
 		try {
-			let photoURL = '';
+			let photoURLs: string[] = [];
 
-			const photoFile = data.photo?.originFileObj as File | undefined;
-			if (photoFile) {
-				const photoRef = ref(storage, `photos/${photoFile.name}`);
-				console.log('Firebase storage ref created:', photoRef.fullPath);
-
-				await uploadBytes(photoRef, photoFile);
-				console.log('File successfully uploaded to Firebase Storage');
-
-				photoURL = await getDownloadURL(photoRef);
-				console.log('File available at:', photoURL);
+			if (data.photos && data.photos.length > 0) {
+				for (const photo of data.photos) {
+					const photoFile = photo.originFileObj as File;
+					if (photoFile) {
+						const photoRef = ref(
+							storage,
+							`photos/${Date.now()}-${photoFile.name}`
+						);
+						await uploadBytes(photoRef, photoFile);
+						const url = await getDownloadURL(photoRef);
+						photoURLs.push(url);
+					}
+				}
 			}
 
 			const productCollectionRef = collection(firestore, 'products');
@@ -77,31 +140,19 @@ const AddNewProduct = () => {
 				gender: data.gender,
 				id: newProductRef.id,
 				status: data.status,
-				photoURL: photoURL,
+				photoURLs: photoURLs,
 				createdAt: serverTimestamp(),
+				colors: data.colors || [], 
+				lengths: data.lengths || []
 			});
 
-			console.log('Product successfully added to Firestore');
-
-			setPreview(null);
 			reset();
+			setPreview(null);
 
-			setTimeout(() => {
-				setLoading(false);
-				toast.success('Product Upload Successful', {
-					position: 'top-right',
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: 'light',
-					transition: Bounce,
-				});
-			}, 2000);
+			toast.success('Product Upload Successful', { transition: Bounce });
 		} catch (error) {
-			console.error('Error adding product to Firestore:', error);
+			console.error('Error adding product:', error);
+			toast.error('Error uploading product');
 		} finally {
 			setLoading(false);
 		}
@@ -145,7 +196,6 @@ const AddNewProduct = () => {
 				<Controller
 					name='description'
 					control={control}
-					
 					rules={{ required: 'Description is required' }}
 					render={({ field }) => (
 						<div className='flex flex-col'>
@@ -183,6 +233,70 @@ const AddNewProduct = () => {
 						</div>
 					)}
 				/>
+
+				{selectedCategory === 'Bracelet stacks' && (
+					<>
+						{/* Colors Field */}
+						<Controller
+							name='colors'
+							control={control}
+							render={({ field }) => (
+								<div className='flex flex-col'>
+									<label className='font-bold text-main'>
+										Available Colors
+									</label>
+									<Select
+										mode='multiple'
+										className='w-[100%] md:w-[40%]'
+										placeholder='Select colors'
+										{...field}>
+										{ColorOptions.map((color) => (
+											<Select.Option key={color.value} value={color.value}>
+												<div className='flex items-center gap-2'>
+													<span
+														style={{
+															backgroundColor: color.value,
+															width: 16,
+															height: 16,
+															borderRadius: '50%',
+															border: '1px solid #ccc',
+															display: 'inline-block',
+														}}
+													/>
+													{color.name}
+												</div>
+											</Select.Option>
+										))}
+									</Select>
+								</div>
+							)}
+						/>
+
+						{/* Length Field */}
+						<Controller
+							name='lengths'
+							control={control}
+							render={({ field }) => (
+								<div className='flex flex-col'>
+									<label className='font-bold text-main'>
+										Wrist Lengths
+									</label>
+									<Select
+										mode='multiple'
+										className='w-[100%] md:w-[40%]'
+										placeholder='Select lengths'
+										{...field}>
+										{LengthOptions.map((length) => (
+											<Select.Option key={length} value={length}>
+												{length}
+											</Select.Option>
+										))}
+									</Select>
+								</div>
+							)}
+						/>
+					</>
+				)}
 
 				<Controller
 					name='gender'
@@ -246,44 +360,47 @@ const AddNewProduct = () => {
 				/>
 
 				<Controller
-					name='photo'
+					name='photos'
 					control={control}
-					rules={{ required: 'Photo is required' }}
+					rules={{ required: 'At least one photo is required' }}
 					render={({ field, fieldState: { error } }) => (
 						<div className='flex flex-col'>
-							<label className='font-bold text-main'>Upload Photo</label>
+							<label className='font-bold text-main'>Upload Photos</label>
 							<Upload
 								listType='picture'
 								accept='image/*'
 								beforeUpload={() => false}
-								fileList={field.value ? [field.value] : []}
+								multiple
+								fileList={field.value || []}
 								onChange={({ fileList }) => {
-									const file = fileList[0]?.originFileObj;
-									if (file) {
-										field.onChange(fileList[0]);
+									field.onChange(fileList);
 
-										const reader = new FileReader();
-										reader.onload = (e) =>
-											setPreview(e?.target?.result as string);
-										reader.readAsDataURL(file);
-
-										console.log(fileList[0]?.originFileObj);
+									if (fileList.length > 0) {
+										const file = fileList[fileList.length - 1]?.originFileObj;
+										if (file) {
+											const reader = new FileReader();
+											reader.onload = (e) =>
+												setPreview(e?.target?.result as string);
+											reader.readAsDataURL(file);
+										}
 									} else {
 										setPreview(null);
-										field.onChange(null);
 									}
 								}}
-								onRemove={() => {
-									setPreview(null);
-									field.onChange(null);
+								onRemove={(file) => {
+									const newList = (field.value || []).filter(
+										(f) => f.uid !== file.uid
+									);
+									field.onChange(newList);
+									if (newList.length === 0) setPreview(null);
 								}}>
-								<Button icon={<UploadOutlined />}>Select Photo</Button>
+								<Button icon={<UploadOutlined />}>Select Photos</Button>
 							</Upload>
 
 							{preview && (
 								<Image
 									src={preview}
-									alt='Uploaded Preview'
+									alt='Preview'
 									style={{ marginTop: '10px', width: '200px' }}
 									preview={false}
 								/>

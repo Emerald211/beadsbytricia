@@ -19,7 +19,7 @@ const Earring = () => {
             key={product.id}
             size={product.size}
             id={product.id}
-            photoURL={product.photoURL}
+            photoURLs={product.photoURLs}
             name={product.name}
             quantity={product.quantity}
             price={product.price}

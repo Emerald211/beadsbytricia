@@ -19,7 +19,7 @@ const MenAccesories = () => {
 
 			<div className=' flex flex-wrap gap-4 p-10 m-10 items-center justify-center'>
 				{filteredProducts?.map((product) => {
-					const { id, name, price, category, photoURL, size, quantity } =
+					const { id, name, price, category, photoURLs, size, quantity } =
 						product;
 					return (
 						<ProductCard
@@ -27,7 +27,7 @@ const MenAccesories = () => {
 							name={name}
 							price={price}
 							category={category}
-							photoURL={photoURL}
+							photoURLs={photoURLs}
 							id={id}
 							size={size}
 							quantity={quantity}

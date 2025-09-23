@@ -6,7 +6,9 @@ export type Product = {
     price: number;
     category: string;
     status: string;
-    photoURL?: string;
+    photoURLs?: string[];
+    colors: string[],
+    lengths: string[],
     id: string,
     gender: string,
     size: string,

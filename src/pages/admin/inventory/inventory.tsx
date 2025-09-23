@@ -23,7 +23,9 @@ const Inventory: React.FC = () => {
 		AdminDashboardContext
 	) as AdminDashboardProps;
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [selectedOrder, setSelectedOrder] = useState<InventoryDataType | null>(null);
+	const [selectedOrder, setSelectedOrder] = useState<InventoryDataType | null>(
+		null
+	);
 
 	const deleteOrders = async (id: string) => {
 		try {
@@ -79,8 +81,11 @@ const Inventory: React.FC = () => {
 			title: 'Action',
 			key: 'action',
 			render: (_, record) => (
-				<Space  size='middle'>
-					<Button className='font-poppins' type='primary' onClick={() => showModal(record)}>
+				<Space size='middle'>
+					<Button
+						className='font-poppins'
+						type='primary'
+						onClick={() => showModal(record)}>
 						View Order Details
 					</Button>
 					<Button
@@ -98,7 +103,8 @@ const Inventory: React.FC = () => {
 	return (
 		<>
 			<div className='w-full font-poppins flex mb-5'></div>
-			<Table className='overflow-x-auto font-poppins'
+			<Table
+				className='overflow-x-auto font-poppins'
 				columns={columns}
 				dataSource={orderDocs || []}
 				onRow={() => ({
@@ -120,11 +126,15 @@ const Inventory: React.FC = () => {
 								key={eachItem.id}
 								className='w-full flex mt-5 border-t-2 px-6 py-4'>
 								<div
-									style={{ backgroundImage: `url(${eachItem.photoURL})` }}
+									style={{
+										backgroundImage: `url(${
+											eachItem.photoURLs && eachItem.photoURLs[0]
+										})`,
+									}}
 									className='image w-[150px] h-[150px] bg-slate-300 bg-cover bg-no-repeat relative group'></div>
 								<div className='w-full px-5 relative'>
 									<h6 className='font-bold absolute top-2 right-5'>
-										₦{eachItem.price} 
+										₦{eachItem.price}
 									</h6>
 									<h1 className='font-bold'>{eachItem.name}</h1>
 									<div className='text-sm flex gap-2 items-center text-slate-400'>

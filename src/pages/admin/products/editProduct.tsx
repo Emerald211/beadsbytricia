@@ -24,7 +24,9 @@ interface AddNewProductProps {
 	category: string;
 	gender: string;
 	status: string;
-	photoURL: UploadFile<unknown> | string | null; // Accept string for URLs
+	photoURLs: string[]; // array of photos
+	colors?: string[];
+	lengths?: string[];
 }
 
 const ProductCategory = [
@@ -47,62 +49,129 @@ const EditProduct = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const { control, handleSubmit, setValue } = useForm<AddNewProductProps>();
-	const [preview, setPreview] = useState<string | null>(null);
-	const [fileList, setFileList] = useState<UploadFile[]>([]); // Store the file list for the upload component
+	const [fileList, setFileList] = useState<UploadFile[]>([]);
+	const [previews, setPreviews] = useState<string[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [product, setProduct] = useState<AddNewProductProps | null>(null);
+	const [colors, setColors] = useState<string[]>([]);
+	const [lengths, setLengths] = useState<string[]>([]);
+
+	const ColorOptions = [
+		{ name: 'Black', value: 'black' },
+		{ name: 'White', value: 'white' },
+		{ name: 'Gray', value: 'gray' },
+		{ name: 'Silver', value: 'silver' },
+		{ name: 'Gold', value: 'gold' },
+		{ name: 'Rose Gold', value: 'rose-gold' },
+		{ name: 'Platinum', value: 'platinum' },
+		{ name: 'Brown', value: 'brown' },
+		{ name: 'Beige', value: 'beige' },
+		{ name: 'Tan', value: 'tan' },
+		{ name: 'Khaki', value: 'khaki' },
+		{ name: 'Olive', value: 'olive' },
+		{ name: 'Red', value: 'red' },
+		{ name: 'Burgundy', value: 'burgundy' },
+		{ name: 'Maroon', value: 'maroon' },
+		{ name: 'Pink', value: 'pink' },
+		{ name: 'Rose Pink', value: 'rose-pink' },
+		{ name: 'Purple', value: 'purple' },
+		{ name: 'Violet', value: 'violet' },
+		{ name: 'Lavender', value: 'lavender' },
+		{ name: 'Blue', value: 'blue' },
+		{ name: 'Navy', value: 'navy' },
+		{ name: 'Sky Blue', value: 'sky-blue' },
+		{ name: 'Turquoise', value: 'turquoise' },
+		{ name: 'Teal', value: 'teal' },
+		{ name: 'Green', value: 'green' },
+		{ name: 'Emerald Green', value: 'emerald-green' },
+		{ name: 'Mint Green', value: 'mint-green' },
+		{ name: 'Lime', value: 'lime' },
+		{ name: 'Yellow', value: 'yellow' },
+		{ name: 'Mustard', value: 'mustard' },
+		{ name: 'Orange', value: 'orange' },
+		{ name: 'Coral', value: 'coral' },
+		{ name: 'Ivory', value: 'ivory' },
+		{ name: 'Cream', value: 'cream' },
+		{ name: 'Champagne', value: 'champagne' },
+	];
+
+	const LengthOptions = ['10cm (Baby size)', '16cm', '18cm', '20cm'];
 
 	useEffect(() => {
 		const fetchProduct = async () => {
 			if (!id) return;
+			setLoading(true);
 
-			setLoading(true); // Start loading state
 			const productRef = doc(db, 'products', id as string);
 			const productDoc = await getDoc(productRef);
 
 			if (productDoc.exists()) {
-				const productData = productDoc.data() as AddNewProductProps;
-				setProduct(productData);
+				const data = productDoc.data() as any;
 
-				// Pre-fill form fields
+				// Handle migration: convert old photoURL -> photoURLs array
+				let photos: string[] = [];
+				if (Array.isArray(data.photoURLs)) {
+					photos = data.photoURLs;
+				} else if (typeof data.photoURL === 'string') {
+					photos = [data.photoURL];
+				}
+
+				const productData: AddNewProductProps = {
+					name: data.name,
+					description: data.description,
+					price: data.price,
+					category: data.category,
+					gender: data.gender,
+					status: data.status,
+					photoURLs: photos,
+					colors: data.colors || [],
+					lengths: data.lengths || [],
+				};
+
+				setProduct(productData);
 				setValue('name', productData.name);
 				setValue('description', productData.description);
 				setValue('price', productData.price);
 				setValue('category', productData.category);
 				setValue('status', productData.status);
-
-				// Set preview image if it exists
-				if (typeof productData.photoURL === 'string') {
-					setPreview(productData.photoURL); // This is just for the preview
-				}
+				setColors(productData.colors || []);
+				setLengths(productData.lengths || []);
+				setPreviews(productData.photoURLs || []);
 			} else {
 				toast.error('Product not found');
-				setProduct(null); // Reset product state if not found
+				setProduct(null);
 			}
 
-			setLoading(false); // End loading state
+			setLoading(false);
 		};
 
 		fetchProduct();
-	}, [id, setValue]); // Re-run when the product ID changes
+	}, [id, setValue]);
 
 	const onSubmit: SubmitHandler<AddNewProductProps> = async (data) => {
 		setLoading(true);
 		try {
 			const productRef = doc(db, 'products', id as string);
 
-			// Initialize photoURL with the existing photo URL
-			let photoURL = preview; // Retain the current photo URL if no new image is uploaded
+			let photoURLs: string[] = previews;
 
-			// If a new file is uploaded, upload it to Firebase Storage
-			if (fileList.length > 0 && fileList[0].originFileObj) {
-				const file = fileList[0].originFileObj as File;
-				const storageRef = ref(storage, `products/${id}/${file.name}`);
-				const uploadTask = await uploadBytes(storageRef, file);
-				photoURL = await getDownloadURL(uploadTask.ref); // Get the new photo URL
+			// Upload new files
+			if (fileList.length > 0) {
+				const uploaded: string[] = [];
+				for (const file of fileList) {
+					if (file.originFileObj) {
+						const f = file.originFileObj as File;
+						const storageRef = ref(storage, `products/${id}/${f.name}`);
+						const uploadTask = await uploadBytes(storageRef, f);
+						const url = await getDownloadURL(uploadTask.ref);
+						uploaded.push(url);
+					} else if (file.url) {
+						uploaded.push(file.url);
+					}
+				}
+				photoURLs = uploaded;
 			}
 
-			// Prepare the updated product data
 			const updatedProduct = {
 				name: data.name || product?.name,
 				description: data.description || product?.description,
@@ -110,10 +179,11 @@ const EditProduct = () => {
 				category: data.category || product?.category,
 				gender: data.gender,
 				status: data.status || product?.status,
-				photo: photoURL, // Keep the original photo unless a new one is uploaded
+				photoURLs,
+				colors,
+				lengths,
 			};
 
-			// Update the Firestore document with the new product data
 			await updateDoc(productRef, updatedProduct);
 
 			toast.success('Product updated successfully!');
@@ -131,7 +201,8 @@ const EditProduct = () => {
 			<ToastContainer transition={Bounce} />
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='w-full flex font-poppins flex-col gap-5 mt-12'>
+				className='w-full flex font-poppins flex-col gap-5 mt-12'
+			>
 				<Controller
 					name='name'
 					control={control}
@@ -175,7 +246,8 @@ const EditProduct = () => {
 								className='w-[100%] font-poppins md:w-[20%]'
 								size='large'
 								placeholder='Select a category'
-								{...field}>
+								{...field}
+							>
 								{ProductCategory.map((cat) => (
 									<Select.Option key={cat} value={cat}>
 										{cat}
@@ -185,6 +257,58 @@ const EditProduct = () => {
 						</div>
 					)}
 				/>
+
+				{product?.category === 'Bracelet stacks' && (
+					<>
+						{/* Colors */}
+						<div className='flex flex-col mt-4'>
+							<label className='font-bold text-main'>Available Colors</label>
+							<Select
+								mode='multiple'
+								className='w-[100%] md:w-[40%]'
+								placeholder='Select colors'
+								value={colors}
+								onChange={setColors}
+							>
+								{ColorOptions.map((color) => (
+									<Select.Option key={color.value} value={color.value}>
+										<div className='flex items-center gap-2'>
+											<span
+												style={{
+													backgroundColor: color.value,
+													width: 16,
+													height: 16,
+													borderRadius: '50%',
+													border: '1px solid #ccc',
+													display: 'inline-block',
+												}}
+											/>
+											{color.name}
+										</div>
+									</Select.Option>
+								))}
+							</Select>
+						</div>
+
+						{/* Lengths */}
+						<div className='flex flex-col mt-4'>
+							<label className='font-bold text-main'>Wrist Lengths</label>
+							<Select
+								mode='multiple'
+								className='w-[100%] md:w-[40%]'
+								placeholder='Select lengths'
+								value={lengths}
+								onChange={setLengths}
+							>
+								{LengthOptions.map((length) => (
+									<Select.Option key={length} value={length}>
+										{length}
+									</Select.Option>
+								))}
+							</Select>
+						</div>
+					</>
+				)}
 
 				<Controller
 					name='gender'
@@ -196,7 +320,8 @@ const EditProduct = () => {
 								className='w-[100%] font-poppins md:w-[20%]'
 								size='large'
 								placeholder='SELECT GENDER'
-								{...field}>
+								{...field}
+							>
 								{Gender.map((status) => (
 									<Select.Option key={status} value={status}>
 										{status}
@@ -233,7 +358,8 @@ const EditProduct = () => {
 								className='w-[100%] font-poppins md:w-[20%]'
 								size='large'
 								placeholder='Select status'
-								{...field}>
+								{...field}
+							>
 								{ProductStatus.map((status) => (
 									<Select.Option key={status} value={status}>
 										{status}
@@ -245,63 +371,69 @@ const EditProduct = () => {
 				/>
 
 				<Controller
-					name='photoURL'
+					name='photoURLs'
 					control={control}
 					render={({ field }) => (
 						<div className='flex flex-col'>
-							<label className='font-bold text-main'>Upload Photo</label>
+							<label className='font-bold text-main'>Upload Photos</label>
 							<Upload
-								listType='picture'
+								listType='picture-card'
 								accept='image/*'
-								beforeUpload={() => false} // Prevent automatic upload
-								fileList={fileList} // Show uploaded file
+								beforeUpload={() => false}
+								fileList={fileList}
 								onChange={({ fileList }) => {
-									setFileList(fileList); // Update the file list
-									field.onChange(fileList); // Sync with form
+									setFileList(fileList);
+									field.onChange(fileList);
 
-									// Handle preview for new files
-									if (fileList.length > 0 && fileList[0].originFileObj) {
-										const file = fileList[0].originFileObj as File;
-										const previewURL = URL.createObjectURL(file);
-										setPreview(previewURL); // Show the new file's preview
-									} else {
-										// Fall back to original product photo
-										setPreview((product?.photoURL as string) || null);
-									}
+									const newPreviews = fileList.map((file) =>
+										file.originFileObj
+											? URL.createObjectURL(file.originFileObj as File)
+											: file.url || ''
+									);
+									setPreviews(newPreviews);
 								}}
 								onRemove={(file) => {
 									const newFileList = fileList.filter(
 										(item) => item.uid !== file.uid
 									);
-									setFileList(newFileList); // Clear file list on removal
-									if (newFileList.length === 0) {
-										// Reset to the original product photo if no files left
-										setPreview((product?.photoURL as string) || null);
-									} else {
-										// Handle the preview of the remaining file if any
-										const remainingFile = newFileList[0].originFileObj as File;
-										const previewURL = URL.createObjectURL(remainingFile);
-										setPreview(previewURL);
-									}
-									field.onChange(newFileList); // Update form field
-								}}>
-								<Button icon={<UploadOutlined />}>Select Photo</Button>
+									setFileList(newFileList);
+									field.onChange(newFileList);
+
+									const newPreviews = newFileList.map((f) =>
+										f.originFileObj
+											? URL.createObjectURL(f.originFileObj as File)
+											: f.url || ''
+									);
+									setPreviews(newPreviews);
+								}}
+								multiple
+							>
+								<Button icon={<UploadOutlined />}>Select Photos</Button>
 							</Upload>
 
-							{/* Display preview */}
-							{preview && (
-								<Image
-									src={preview}
-									alt='Uploaded Preview'
-									style={{ marginTop: '10px', width: '200px' }}
-									preview={false}
-								/>
-							)}
+							{/* Display previews */}
+							<div className='flex flex-wrap gap-3 mt-3'>
+								{previews.map((src, idx) => (
+									<Image
+										key={idx}
+										src={src}
+										alt={`Preview ${idx}`}
+										width={120}
+										height={120}
+										preview={false}
+									/>
+								))}
+							</div>
 						</div>
 					)}
 				/>
 
-				<Button className=' bg-main' type='primary' htmlType='submit' loading={loading}>
+				<Button
+					className='bg-main'
+					type='primary'
+					htmlType='submit'
+					loading={loading}
+				>
 					Update Product
 				</Button>
 			</form>

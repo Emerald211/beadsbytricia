@@ -19,7 +19,7 @@ const NewArrival = () => {
 
 			<div className=' flex mt-12 flex-wrap gap-4  items-center justify-center'>
 				{sortedProducts?.map((product) => {
-					const { id, name, price, category, photoURL, size, quantity } =
+					const { id, name, price, category, photoURLs, size, quantity } =
 						product;
 					return (
 						<ProductCard
@@ -27,7 +27,7 @@ const NewArrival = () => {
 							name={name}
 							price={price}
 							category={category}
-							photoURL={photoURL}
+							photoURLs={photoURLs}
 							id={id}
 							size={size}
 							quantity={quantity}
