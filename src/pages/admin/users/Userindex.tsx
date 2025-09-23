@@ -38,7 +38,7 @@ const UsersTable: React.FC = () => {
 
   const showDeleteConfirm = (id: string) => {
     confirm({
-      title: "Are you sure you want to delete this product?",
+      title: "Are you sure you want to delete this user?",
       icon: <ExclamationCircleOutlined />,
       content: "This action cannot be undone",
       onOk() {
