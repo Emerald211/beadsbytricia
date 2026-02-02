@@ -1,7 +1,38 @@
+@import './assets/fonts/fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Apply Bison (Oswald) font globally for luxury feel */
+html,
+body {
+	font-family: 'Oswald', 'Bebas Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure all text inherits the luxury font */
+* {
+	font-family: inherit;
+}
+
 .custom-spinner .ant-spin-dot-item {
-  @apply bg-[#F8B466]; /* Use Tailwind's bg-color utility to apply custom color */
+	@apply bg-[#F8B466]; /* Use Tailwind's bg-color utility to apply custom color */
+}
+
+/* Smooth scrolling for luxury feel */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Selection color with gold accent */
+::selection {
+	background-color: #d4af37;
+	color: white;
+}
+
+::-moz-selection {
+	background-color: #d4af37;
+	color: white;
 }

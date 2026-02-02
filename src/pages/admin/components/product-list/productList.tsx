@@ -87,7 +87,7 @@ const ProductList: React.FC = () => {
 			title: 'Name',
 			dataIndex: 'name',
 			key: 'name',
-			render: (text) => <a className='font-poppins'>{text}</a>,
+			render: (text) => <a className='font-bison'>{text}</a>,
 		},
 		{
 			title: 'Price',
@@ -134,7 +134,7 @@ const ProductList: React.FC = () => {
 			render: (_, record) => (
 				<Space size='middle'>
 					<Button
-						className='font-poppins'
+						className='font-bison'
 						type='primary'
 						onClick={() =>
 							navigate(`/admin-dashboard/product/edit-product/${record.id}`)
@@ -142,7 +142,7 @@ const ProductList: React.FC = () => {
 						Edit
 					</Button>
 					<Button
-						className='font-poppins'
+						className='font-bison'
 						type='primary'
 						danger
 						onClick={() => showDeleteConfirm(record.id)}>
@@ -155,7 +155,7 @@ const ProductList: React.FC = () => {
 
 	return (
 		<>
-			<div className='w-full flex mb-5 font-poppins'>
+			<div className='w-full flex mb-5 font-bison'>
 				<h1 className='text-main font-bold'>List of all Products</h1>
 				<button
 					onClick={() => navigate('/admin-dashboard/product/add-new-product')}
@@ -164,7 +164,7 @@ const ProductList: React.FC = () => {
 				</button>
 			</div>
 			<Table
-				className=' font-poppins overflow-x-auto'
+				className=' font-bison overflow-x-auto'
 				columns={columns}
 				dataSource={data}
         onRow={() => ({

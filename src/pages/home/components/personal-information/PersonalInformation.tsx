@@ -89,10 +89,10 @@ const PersonalInformation = () => {
   };
 
   return (
-    <section className="flex items-center justify-center flex-col font-main py-12 md:py-24 px-12 md:px-24 w-full h-auto">
+    <section className="flex items-center justify-center flex-col font-bison py-12 md:py-24 px-12 md:px-24 w-full h-auto">
       {contextHolder}
       <div>
-        <h1 className=" text-3xl font-serrat font-bold text-main">
+        <h1 className=" text-3xl font-bison font-bold text-main">
           Personal Information
         </h1>
       </div>
@@ -108,7 +108,7 @@ const PersonalInformation = () => {
             required: "Firstname is required",
           }}
           render={({ field }) => (
-            <div className=" font-serrat gap-2 flex flex-col">
+            <div className=" font-bison gap-2 flex flex-col">
               <label className=" text-sm font-bold" htmlFor="firstName">
                 Firstname
               </label>
@@ -128,7 +128,7 @@ const PersonalInformation = () => {
             required: "lastName is required",
           }}
           render={({ field }) => (
-            <div className=" font-serrat gap-2 flex flex-col">
+            <div className=" font-bison gap-2 flex flex-col">
               <label className=" text-sm font-bold" htmlFor="firstName">
                 Lastname
               </label>
@@ -148,7 +148,7 @@ const PersonalInformation = () => {
             required: "Phone No is required",
           }}
           render={({ field }) => (
-            <div className="font-serrat gap-2 flex flex-col">
+            <div className="font-bison gap-2 flex flex-col">
               <label className="text-sm font-bold" htmlFor="lastName">
                 Phone No
               </label>
@@ -170,7 +170,7 @@ const PersonalInformation = () => {
             required: "Date of Birth is required",
           }}
           render={({ field }) => (
-            <div className=" font-serrat gap-2 flex flex-col">
+            <div className=" font-bison gap-2 flex flex-col">
               <label className=" text-sm font-bold" htmlFor="firstName">
                 Date of birth
               </label>

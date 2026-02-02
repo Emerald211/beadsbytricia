@@ -48,7 +48,7 @@ const AdminDashboard: React.FC = () => {
   }, []);
 
   return (
-    <Layout className="w-screen font-poppins h-screen ">
+    <Layout className="w-screen font-bison h-screen ">
       <Sider
         style={{ background: "#000000", color: "#fff" }}
         className={` py-10 ${collapsed ? 'showSidebar' : 'hideSidebar'}`}
@@ -141,7 +141,7 @@ const AdminDashboard: React.FC = () => {
               height: 64,
             }}
           />
-          <h1 className="font-bold font-poppins text-main">
+          <h1 className="font-bold font-bison text-main">
             BeadsbyTricia Admin Dashboard
           </h1>
           <h5 className="ml-auto text-main font-bold">

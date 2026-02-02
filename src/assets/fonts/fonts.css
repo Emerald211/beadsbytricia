@@ -1,0 +1,54 @@
+/* Bison Font Family */
+/* 
+ * Note: Bison is a premium font. You'll need to add the actual font files.
+ * Place your Bison font files (.woff2, .woff, .ttf) in /src/assets/fonts/
+ * and uncomment the @font-face rules below.
+ *
+ * If you have the font files, rename them to match these names:
+ * - Bison-Regular.woff2
+ * - Bison-Bold.woff2
+ * - Bison-Light.woff2
+ */
+
+/* Option 1: Self-hosted font files (recommended if you have the files) */
+/*
+@font-face {
+  font-family: 'Bison';
+  src: url('../fonts/Bison-Regular.woff2') format('woff2'),
+       url('../fonts/Bison-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bison';
+  src: url('../fonts/Bison-Bold.woff2') format('woff2'),
+       url('../fonts/Bison-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bison';
+  src: url('../fonts/Bison-Light.woff2') format('woff2'),
+       url('../fonts/Bison-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* Option 2: Using a similar free alternative for now */
+/* Using 'Bebas Neue' as a Bison-like alternative from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&display=swap');
+
+/* 
+ * When you have Bison font files:
+ * 1. Create folder: /src/assets/fonts/
+ * 2. Add your Bison font files there
+ * 3. Uncomment the @font-face rules above
+ * 4. Remove the Google Fonts import
+ * 5. Update tailwind.config.js bison value to just 'Bison'
+ */

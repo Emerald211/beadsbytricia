@@ -1,50 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/BEADT.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    /><link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/BEADT.jpg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/BEADT.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <title>BeadsbyTricia | Nigeria's Premier Luxury Bead Accessories & Jewelry</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BeadsbyTricia | Nigeria’s No.1 Luxury Bead Accessories Brand</title>
+  <!-- Primary SEO Meta Tags -->
+  <meta name="description"
+    content="BeadsbyTricia is Nigeria's leading luxury bead accessories brand. Shop handcrafted bead jewelry, bridal sets, bracelet stacks, neck candies, statement earrings, and beaded bags. Premium quality, African elegance." />
+  <meta name="keywords"
+    content="BeadsbyTricia, luxury beads Nigeria, handcrafted bead jewelry, Nigerian bead accessories, bridal beads, bracelet stacks, neck candies, statement earrings, beaded bags, African jewelry, Abuja beads, Lagos fashion, groom accessories, walking sticks, gemstone pendants" />
+  <meta name="author" content="BeadsbyTricia" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href="https://www.beadsbytricia.com" />
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="BeadwithTricia is Nigeria’s No.1 destination for bold, luxurious bead accessories. Handcrafted elegance that speaks royalty, power, and prestige. Elevate your style with iconic pieces that turn heads." />
-    <meta name="keywords" content="beads Nigeria, luxury bead accessories, handcrafted jewelry, beadwithtricia, Nigerian fashion, bridal beads, statement accessories, custom beads, bead necklaces, Abuja beads, Lagos fashion" />
-    <meta name="author" content="BeadwithTricia" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://www.beadwithtricia.com" />
+  <!-- Geo Tags for Local SEO -->
+  <meta name="geo.region" content="NG" />
+  <meta name="geo.placename" content="Nigeria" />
+  <meta name="geo.position" content="9.0820;8.6753" />
+  <meta name="ICBM" content="9.0820, 8.6753" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.beadwithtricia.com" />
-    <meta property="og:title" content="BeadwithTricia | Nigeria’s No.1 Luxury Bead Accessories Brand" />
-    <meta property="og:description" content="Explore BeadwithTricia’s luxury bead accessories — handcrafted for kings, queens, and those who demand to stand out." />
-    <meta property="og:image" content="https://www.beadwithtricia.com/assets/og-cover.jpg" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BeadsbyTricia" />
+  <meta property="og:url" content="https://www.beadsbytricia.com" />
+  <meta property="og:title" content="BeadsbyTricia | Nigeria's Premier Luxury Bead Accessories & Jewelry" />
+  <meta property="og:description"
+    content="Discover BeadsbyTricia's exquisite collection of handcrafted luxury bead accessories. From bridal sets to statement pieces, elevate your style with authentic African elegance." />
+  <meta property="og:image" content="https://www.beadsbytricia.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_NG" />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.beadwithtricia.com" />
-    <meta name="twitter:title" content="BeadwithTricia | Nigeria’s No.1 Luxury Bead Accessories Brand" />
-    <meta name="twitter:description" content="Bold. Luxurious. African. Discover premium handmade bead accessories that embody elegance, power, and heritage." />
-    <meta name="twitter:image" content="https://www.beadwithtricia.com/assets/og-cover.jpg" />
-  </head>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@beadsbytricia" />
+  <meta name="twitter:creator" content="@beadsbytricia" />
+  <meta name="twitter:url" content="https://www.beadsbytricia.com" />
+  <meta name="twitter:title" content="BeadsbyTricia | Nigeria's Premier Luxury Bead Accessories" />
+  <meta name="twitter:description"
+    content="Shop premium handcrafted bead jewelry, bridal sets, bracelet stacks & more. Nigeria's leading luxury bead accessories brand." />
+  <meta name="twitter:image" content="https://www.beadsbytricia.com/og-image.jpg" />
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.beadsbytricia.com/#organization",
+      "name": "BeadsbyTricia",
+      "alternateName": ["Beads by Tricia", "BeadsByTricia", "Beads By Tricia Nigeria"],
+      "url": "https://www.beadsbytricia.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.beadsbytricia.com/BEADT.jpg",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://www.beadsbytricia.com/og-image.jpg",
+      "description": "Nigeria's premier luxury bead accessories brand offering handcrafted jewelry, bridal sets, and statement pieces.",
+      "foundingDate": "2020",
+      "founder": {
+        "@type": "Person",
+        "name": "Tricia"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "NG",
+        "addressRegion": "Nigeria"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "availableLanguage": ["English"],
+          "url": "https://www.beadsbytricia.com/contact"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "availableLanguage": ["English"],
+          "url": "https://www.beadsbytricia.com/shop"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/beadsbytricia",
+        "https://www.facebook.com/beadsbytricia",
+        "https://www.twitter.com/beadsbytricia",
+        "https://www.tiktok.com/@beadsbytricia",
+        "https://wa.me/2348000000000"
+      ]
+    }
+    </script>
+
+  <!-- Structured Data: WebSite with SearchAction (enables search box in results) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.beadsbytricia.com/#website",
+      "name": "BeadsbyTricia",
+      "alternateName": "Beads by Tricia",
+      "url": "https://www.beadsbytricia.com",
+      "publisher": {
+        "@id": "https://www.beadsbytricia.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.beadsbytricia.com/shop?search={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": "en-NG"
+    }
+    </script>
+
+  <!-- Structured Data: LocalBusiness/JewelryStore -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["JewelryStore", "Store"],
+      "@id": "https://www.beadsbytricia.com/#store",
+      "name": "BeadsbyTricia",
+      "image": [
+        "https://www.beadsbytricia.com/BEADT.jpg",
+        "https://www.beadsbytricia.com/og-image.jpg"
+      ],
+      "url": "https://www.beadsbytricia.com",
+      "priceRange": "₦₦₦",
+      "description": "Premium handcrafted bead accessories and luxury jewelry store in Nigeria. Shop bridal sets, statement earrings, beaded bags, bracelet stacks, and more.",
+      "currenciesAccepted": "NGN",
+      "paymentAccepted": "Credit Card, Debit Card, Bank Transfer, Paystack",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "NG",
+        "addressRegion": "Nigeria"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "9.0820",
+        "longitude": "8.6753"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "16:00"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "BeadsbyTricia Collections",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "Women's Collection",
+            "url": "https://www.beadsbytricia.com/shop?category=women",
+            "itemListElement": [
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Statement Earrings", "url": "https://www.beadsbytricia.com/statement-earrings"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Beaded Bags", "url": "https://www.beadsbytricia.com/beaded-bags"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Bridal Sets", "url": "https://www.beadsbytricia.com/bridal"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Bracelet Stacks", "url": "https://www.beadsbytricia.com/bracelet-stacks"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Gemstone Pendants", "url": "https://www.beadsbytricia.com/gemstone-pendant"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Statement Throw-ons", "url": "https://www.beadsbytricia.com/statement-throwon"}}
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Men's Collection",
+            "url": "https://www.beadsbytricia.com/shop?category=men",
+            "itemListElement": [
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Bracelet Stacks", "url": "https://www.beadsbytricia.com/bracelet-stacks"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Neck Candies", "url": "https://www.beadsbytricia.com/neck-candies"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Groom's/Owambe Sets", "url": "https://www.beadsbytricia.com/grooms-owanbe-sets"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Walking Sticks", "url": "https://www.beadsbytricia.com/walking-sticks"}}
+            ]
+          }
+        ]
+      }
+    }
+    </script>
+
+  <!-- Structured Data: ItemList for Collections (helps Google show category links) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "BeadsbyTricia Product Collections",
+      "description": "Browse our luxury bead accessories collections",
+      "url": "https://www.beadsbytricia.com/shop",
+      "numberOfItems": 10,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "New Arrivals",
+          "description": "Latest bead accessories and jewelry pieces",
+          "url": "https://www.beadsbytricia.com/new-arrival"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Bridal Collection",
+          "description": "Luxurious bridal bead sets for your special day",
+          "url": "https://www.beadsbytricia.com/bridal"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Statement Earrings",
+          "description": "Bold and beautiful beaded earrings",
+          "url": "https://www.beadsbytricia.com/statement-earrings"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Beaded Bags",
+          "description": "Handcrafted luxury beaded bags and clutches",
+          "url": "https://www.beadsbytricia.com/beaded-bags"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Bracelet Stacks",
+          "description": "Stylish bracelet stacks for men and women",
+          "url": "https://www.beadsbytricia.com/bracelet-stacks"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Neck Candies",
+          "description": "Elegant necklaces and neck pieces",
+          "url": "https://www.beadsbytricia.com/neck-candies"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Groom's & Owambe Sets",
+          "description": "Complete bead sets for grooms and traditional events",
+          "url": "https://www.beadsbytricia.com/grooms-owanbe-sets"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Walking Sticks",
+          "description": "Elegant beaded walking sticks for men",
+          "url": "https://www.beadsbytricia.com/walking-sticks"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "Gemstone Pendants",
+          "description": "Beautiful gemstone pendant necklaces",
+          "url": "https://www.beadsbytricia.com/gemstone-pendant"
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "name": "Trending Items",
+          "description": "Most popular bead accessories right now",
+          "url": "https://www.beadsbytricia.com/trending"
+        }
+      ]
+    }
+    </script>
+
+  <!-- Structured Data: SiteNavigationElement (for sitelinks) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-shop",
+          "name": "Shop All Products",
+          "description": "Browse our complete collection of luxury bead accessories",
+          "url": "https://www.beadsbytricia.com/shop"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-new",
+          "name": "New Arrivals",
+          "description": "Discover our latest bead jewelry and accessories",
+          "url": "https://www.beadsbytricia.com/new-arrival"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-bridal",
+          "name": "Bridal Collection",
+          "description": "Luxury bridal bead sets for weddings",
+          "url": "https://www.beadsbytricia.com/bridal"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-earrings",
+          "name": "Statement Earrings",
+          "description": "Bold beaded earrings collection",
+          "url": "https://www.beadsbytricia.com/statement-earrings"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-bags",
+          "name": "Beaded Bags",
+          "description": "Handcrafted beaded bags and clutches",
+          "url": "https://www.beadsbytricia.com/beaded-bags"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-bracelets",
+          "name": "Bracelet Stacks",
+          "description": "Stylish bead bracelet stacks",
+          "url": "https://www.beadsbytricia.com/bracelet-stacks"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-contact",
+          "name": "Contact Us",
+          "description": "Get in touch with BeadsbyTricia",
+          "url": "https://www.beadsbytricia.com/contact"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-trending",
+          "name": "Trending Items",
+          "description": "Popular bead accessories",
+          "url": "https://www.beadsbytricia.com/trending"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.beadsbytricia.com/#nav-login",
+          "name": "My Account",
+          "description": "Sign in to your BeadsbyTricia account",
+          "url": "https://www.beadsbytricia.com/login"
+        }
+      ]
+    }
+    </script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.beadsbytricia.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Shop",
+          "item": "https://www.beadsbytricia.com/shop"
+        }
+      ]
+    }
+    </script>
+
+  <!-- Structured Data: FAQPage (helps with rich snippets) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What types of bead accessories does BeadsbyTricia sell?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BeadsbyTricia offers a wide range of luxury bead accessories including statement earrings, beaded bags, bracelet stacks, neck candies, bridal sets, groom's sets, walking sticks, gemstone pendants, and statement throw-ons. All pieces are handcrafted with premium quality beads."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does BeadsbyTricia ship across Nigeria?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! BeadsbyTricia delivers to all states in Nigeria. We also offer international shipping to select countries. Shipping costs are calculated at checkout based on your location."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are BeadsbyTricia products handmade?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, all BeadsbyTricia pieces are handcrafted by skilled artisans using premium quality beads. Each piece is made with attention to detail to ensure the highest quality and unique designs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I contact BeadsbyTricia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can reach BeadsbyTricia through our Contact page, via Instagram @beadsbytricia, or through WhatsApp. We typically respond within 24 hours."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

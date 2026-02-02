@@ -11,7 +11,7 @@ const Trending = () => {
 
 	return (
 		<div className=' px-12 mt-12 mb-24 text-main flex flex-col items-center justify-center'>
-			<h1 className=' font-serrat text-2xl font-bold flex items-start justify-start'>
+			<h1 className=' font-bison text-2xl font-bold flex items-start justify-start'>
 				Trending 🔥
 			</h1>
 

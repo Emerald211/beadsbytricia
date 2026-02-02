@@ -12,7 +12,7 @@ const WomenAccesories = () => {
 	);
 	return (
 		<div className=' mt-12 text-main'>
-			<h1 className=' font-serrat text-3xl font-bold flex items-center justify-center'>
+			<h1 className=' font-bison text-3xl font-bold flex items-center justify-center'>
 				WOMEN ACCESORIES
 			</h1>
 

@@ -57,25 +57,25 @@ const Inventory: React.FC = () => {
 			title: 'Full Name',
 			dataIndex: 'name',
 			key: 'name',
-			render: (text) => <a className='font-poppins'>{text}</a>,
+			render: (text) => <a className='font-bison'>{text}</a>,
 		},
 		{
 			title: 'Email',
 			dataIndex: 'email',
 			key: 'email',
-			render: (text) => <a className='font-poppins'>{text}</a>,
+			render: (text) => <a className='font-bison'>{text}</a>,
 		},
 		{
 			title: 'Phone No',
 			dataIndex: 'phoneNo',
 			key: 'phoneNo',
-			render: (text) => <a className='font-poppins'>{text}</a>,
+			render: (text) => <a className='font-bison'>{text}</a>,
 		},
 		{
 			title: 'Amount Paid',
 			dataIndex: 'amount',
 			key: 'amount',
-			render: (text) => <a className='font-poppins'>₦{text}</a>,
+			render: (text) => <a className='font-bison'>₦{text}</a>,
 		},
 		{
 			title: 'Action',
@@ -83,13 +83,13 @@ const Inventory: React.FC = () => {
 			render: (_, record) => (
 				<Space size='middle'>
 					<Button
-						className='font-poppins'
+						className='font-bison'
 						type='primary'
 						onClick={() => showModal(record)}>
 						View Order Details
 					</Button>
 					<Button
-						className='font-poppins'
+						className='font-bison'
 						type='primary'
 						danger
 						onClick={() => deleteOrders(record.orderNumber)}>
@@ -102,9 +102,9 @@ const Inventory: React.FC = () => {
 
 	return (
 		<>
-			<div className='w-full font-poppins flex mb-5'></div>
+			<div className='w-full font-bison flex mb-5'></div>
 			<Table
-				className='overflow-x-auto font-poppins'
+				className='overflow-x-auto font-bison'
 				columns={columns}
 				dataSource={orderDocs || []}
 				onRow={() => ({

@@ -19,37 +19,37 @@ const DashboardIndex = () => {
 	}, 0);
 	return (
 		<div>
-			<Row className='w-full font-poppins flex gap-6 flex-col md:flex-row md:flex-wrap'>
+			<Row className='w-full font-bison flex gap-6 flex-col md:flex-row md:flex-wrap'>
 				<Col className='w-[100%] md:w-[20%] bg-[#000] rounded-2xl gap-1 h-[100px] flex flex-col justify-center items-center'>
-					<h5 className=' text-white font-poppins text-xs font-bold'>
+					<h5 className=' text-white font-bison text-xs font-bold'>
 						Total Customers
 					</h5>
 					<UsergroupAddOutlined className=' text-4xl text-white' />
 
-					<h1 className=' text-white font-poppins font-bold'>
+					<h1 className=' text-white font-bison font-bold'>
 						{userDocs?.length}
 					</h1>
 				</Col>
 				<Col className='w-[100%] md:w-[50%] gap-2 bg-[#000] rounded-2xl h-[120px] flex flex-col justify-center items-center'>
-					<h5 className=' text-white text-xs font-poppins font-bold'>
+					<h5 className=' text-white text-xs font-bison font-bold'>
 						Annual Revenue
 					</h5>
 					<PieChartFilled className=' text-2xl text-white' />
-					<h1 className=' text-white font-poppins font-bold text-xl'>
+					<h1 className=' text-white font-bison font-bold text-xl'>
 						₦{totalRevenue}
 					</h1>
 				</Col>
 				<Col className='w-[100%] md:w-[20%] bg-[#000] rounded-2xl h-[100px] flex flex-col justify-center items-center'>
-					<h5 className=' text-white font-poppins text-xl font-bold'>Orders</h5>
+					<h5 className=' text-white font-bison text-xl font-bold'>Orders</h5>
 					<ShoppingCartOutlined className=' text-2xl text-white' />
 
-					<h1 className=' text-white font-poppins text-xl font-bold'>
+					<h1 className=' text-white font-bison text-xl font-bold'>
 						{orderDocs?.length}
 					</h1>
 				</Col>
 			</Row>
 
-			<section className=' mt-24 font-poppins flex flex-col gap-4'>
+			<section className=' mt-24 font-bison flex flex-col gap-4'>
 				<h1 className=' font-bold text-main'>Recent Orders from Store</h1>
 
 				<Inventory />

@@ -45,7 +45,7 @@ const Checkout = () => {
 	const [userFromDoc, setUserFromDoc] = useState<UserFromDocProps | null>(null);
 	const [couponCode, setCouponCode] = useState('');
 	const navigate = useNavigate();
-	const swiperRef = useRef<SwiperCore| null>(null);
+	const swiperRef = useRef<SwiperCore | null>(null);
 	const { products } = useContext(AdminDashboardContext) as AdminDashboardProps;
 	const goToNextSlide = () => {
 		swiperRef.current?.slideNext();
@@ -116,30 +116,68 @@ const Checkout = () => {
 
 	const sendEmailOnSuccess = (
 		userFromDoc: UserFromDocProps,
-		amount: number
+		amount: number,
+		orderNumber: string,
 	) => {
 		emailjs.init('mESjxZ_og4PkWRGaA');
 
-		const templateParams = {
+		// Email to buyer
+		const buyerTemplateParams = {
 			customerName: userFromDoc?.displayName ?? 'Anonymous',
 			customerEmail: userFromDoc?.email ?? 'default@example.com',
-			orderNumber: crypto.randomUUID(),
+			orderNumber: orderNumber,
 			amount: amount,
 			message: orderNote,
 			phone_number: userFromDoc?.phoneNo,
 		};
 
-		emailjs.send('service_x1xb88n', 'template_vswwvhp', templateParams).then(
-			(response) => {
-				console.log('SUCCESS!', response.status, response.text);
-			},
-			(error) => {
-				console.error('FAILED...', error);
-			}
-		);
+		emailjs
+			.send('service_x1xb88n', 'template_vswwvhp', buyerTemplateParams)
+			.then(
+				(response) => {
+					console.log('Buyer email SUCCESS!', response.status, response.text);
+				},
+				(error) => {
+					console.error('Buyer email FAILED...', error);
+				},
+			);
+
+		// Email to seller (Patricia)
+		const itemsList =
+			cartItems
+				?.map(
+					(item) =>
+						`${item.name} (x${item.quantity}) - ₦${item.price.toLocaleString('en-NG')}`,
+				)
+				.join(', ') || 'No items';
+
+		const sellerTemplateParams = {
+			order_id: orderNumber,
+			amount: `₦${(amount / 100).toLocaleString('en-NG')}`,
+			paymentMethod: 'Paystack',
+			name: userFromDoc?.displayName ?? 'Anonymous',
+			email: userFromDoc?.email ?? 'default@example.com',
+			items: itemsList,
+			address: 'Not provided',
+			deliverytime: 'Standard delivery',
+			country: 'Nigeria',
+			city: 'Not provided',
+			phone_number: userFromDoc?.phoneNo ?? 'Not provided',
+		};
+
+		emailjs
+			.send('service_x1xb88n', 'template_csfo85y', sellerTemplateParams)
+			.then(
+				(response) => {
+					console.log('Seller email SUCCESS!', response.status, response.text);
+				},
+				(error) => {
+					console.error('Seller email FAILED...', error);
+				},
+			);
 	};
 
-	const publicKey = 'pk_test_fb59388796c0aacc4979c718eac130656df09539';
+	const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
 	const amount = (totalPrice ?? 0) * 100;
 
 	const componentProps = {
@@ -163,6 +201,8 @@ const Checkout = () => {
 		text: 'Go to Checkout →',
 		onSuccess: async () => {
 			if (userFromDoc) {
+				const orderNumber = crypto.randomUUID();
+
 				const orderData = {
 					amount: totalPrice,
 					orderItems: cartItems,
@@ -170,18 +210,18 @@ const Checkout = () => {
 					email: userFromDoc.email,
 					phoneNo: userFromDoc.phoneNo ?? 'Not provided',
 					message: orderNote,
-					orderNumber: crypto.randomUUID(),
-					uid: user?.uid as string
+					orderNumber: orderNumber,
+					uid: user?.uid as string,
 				};
 
 				await addOrderToFirestore(orderData);
 				await addOrderToUserFirestore(userFromDoc.id, {
-					orderNumber: crypto.randomUUID(),
+					orderNumber: orderNumber,
 					amount: totalPrice ?? 0,
 					cartItems: cartItems ?? [],
 				});
 
-				sendEmailOnSuccess(userFromDoc, amount);
+				sendEmailOnSuccess(userFromDoc, amount, orderNumber);
 				navigate('/order-history');
 			} else {
 				console.error('User information is not available.');
@@ -202,7 +242,6 @@ const Checkout = () => {
 								<h1 className='text-xl font-semibold text-gray-900 flex items-center gap-2'>
 									Your cart <ShoppingCartOutlined />
 								</h1>
-							
 							</div>
 
 							<div className='text-sm text-gray-500 mb-6'>
@@ -212,22 +251,30 @@ const Checkout = () => {
 							{/* Cart Items */}
 							<div className='space-y-4'>
 								{cartItems?.map((eachItem) => {
-									const { name, category, size, price, quantity, id, photoURLs } = eachItem;
+									const {
+										name,
+										category,
+										size,
+										price,
+										quantity,
+										id,
+										photoURLs,
+									} = eachItem;
 
 									return (
-										<div key={id} className='flex items-center gap-4 p-4 border border-gray-200 rounded-xl'>
-										
-
+										<div
+											key={id}
+											className='flex items-center gap-4 p-4 border border-gray-200 rounded-xl'>
 											{/* Product Image */}
 											<div className='relative'>
 												<div
-													style={{ backgroundImage: `url(${photoURLs && photoURLs[0]})` }}
-													className='w-20 h-20 bg-gray-200 bg-cover bg-center rounded-lg'
-												></div>
+													style={{
+														backgroundImage: `url(${photoURLs && photoURLs[0]})`,
+													}}
+													className='w-20 h-20 bg-gray-200 bg-cover bg-center rounded-lg'></div>
 												<button
 													onClick={() => handleDeleteItem(id)}
-													className='absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs hover:bg-red-600 transition-colors'
-												>
+													className='absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs hover:bg-red-600 transition-colors'>
 													×
 												</button>
 											</div>
@@ -250,8 +297,7 @@ const Checkout = () => {
 												<button
 													onClick={() => handleDecreaseQuantity(id)}
 													className='p-2 hover:bg-gray-100 transition-colors'
-													disabled={quantity <= 1}
-												>
+													disabled={quantity <= 1}>
 													<MinusOutlined className='text-xs' />
 												</button>
 												<span className='px-4 py-2 text-sm font-medium min-w-[3rem] text-center'>
@@ -259,8 +305,7 @@ const Checkout = () => {
 												</span>
 												<button
 													onClick={() => handleIncreaseQuantity(id)}
-													className='p-2 hover:bg-gray-100 transition-colors'
-												>
+													className='p-2 hover:bg-gray-100 transition-colors'>
 													<PlusOutlined className='text-xs' />
 												</button>
 											</div>
@@ -274,7 +319,9 @@ const Checkout = () => {
 					{/* Right Section - Order Summary */}
 					<div className='lg:col-span-1'>
 						<div className='bg-white rounded-2xl p-6 shadow-sm sticky top-8'>
-							<h2 className='text-xl font-semibold text-gray-900 mb-6'>Order Summary</h2>
+							<h2 className='text-xl font-semibold text-gray-900 mb-6'>
+								Order Summary
+							</h2>
 
 							{/* Coupon Code */}
 							<div className='mb-6'>
@@ -301,7 +348,9 @@ const Checkout = () => {
 								{discount > 0 && (
 									<div className='flex justify-between text-gray-600'>
 										<span>Discount</span>
-										<span className='text-red-500'>-₦{discount.toLocaleString('en-NG')}</span>
+										<span className='text-red-500'>
+											-₦{discount.toLocaleString('en-NG')}
+										</span>
 									</div>
 								)}
 								{tax > 0 && (
@@ -322,8 +371,7 @@ const Checkout = () => {
 							<div className='mb-6'>
 								<button
 									onClick={() => setOrderNote(!orderNote)}
-									className='flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors'
-								>
+									className='flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors'>
 									{orderNote ? <MinusOutlined /> : <PlusOutlined />}
 									<span className='underline'>Add order notes</span>
 								</button>
@@ -363,8 +411,8 @@ const Checkout = () => {
 
 			<main className=' mt-8 md:mt-24'>
 				<div className=' px-12 flex justify-center items-center'>
-					<h1 className=' text-main text-center font-bold font-poppins text-5xl'>
-					Similar Products
+					<h1 className=' text-main text-center font-bold font-bison text-5xl'>
+						Similar Products
 					</h1>
 				</div>
 				<div className=' mt-12  flex   w-full'>
@@ -396,7 +444,9 @@ const Checkout = () => {
 							const { id, name, price, category, photoURLs, size, quantity } =
 								product;
 							return (
-								<SwiperSlide key={id} className='flex justify-center items-center '>
+								<SwiperSlide
+									key={id}
+									className='flex justify-center items-center '>
 									<ProductCard
 										key={id}
 										name={name}

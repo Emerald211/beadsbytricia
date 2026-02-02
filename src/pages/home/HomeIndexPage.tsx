@@ -4,7 +4,7 @@ import SwiperCore from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'; // Import modules directly from 'swiper'
 import 'swiper/swiper-bundle.css';
 import { useContext, useEffect, useRef, useState } from 'react';
-import {  useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { AdminDashboardContext } from '../../utils/context/admin-state-context/AdminContext';
 import { AdminDashboardProps } from '../../utils/context/admin-state-context/types/AdminTypes';
@@ -41,17 +41,12 @@ const HomeIndexPage = () => {
 	const navigate = useNavigate();
 
 	const {
-	
-
 		formState: { errors },
 	} = useForm<EmailSubscriberProps>();
 
 	console.log(errors);
 	const goToNextSlide = () => {
 		swiperRef.current?.slideNext();
-
-		
-		
 	};
 
 	const goToPrevSlide = () => {
@@ -70,7 +65,7 @@ const HomeIndexPage = () => {
 						style={{ backgroundImage: `url(${img})` }}
 					/>
 				))}
-				<div className=' z-30 w-full md:w-[60%] font-poppins '>
+				<div className=' z-30 w-full md:w-[60%] font-bison '>
 					<motion.h1 className='text-white text-5xl font-extrabold drop-shadow-[0_2px_4px_rgba(255, 255, 255, 0.9)]'>
 						Nigeria’s No.1 Bead Accessories Brand
 					</motion.h1>
@@ -79,50 +74,72 @@ const HomeIndexPage = () => {
 						to elevate every look. Trusted by thousands across the country.
 					</p>
 
-					<button
+					<motion.button
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.4 }}
+						whileHover={{ scale: 1.05, backgroundColor: '#D4AF37' }}
+						whileTap={{ scale: 0.95 }}
 						onClick={() => navigate('/shop')}
-						className='relative font-bold w-[150px] text-white mt-8 font-poppins px-4 py-4 bg-main'>
+						className='relative font-bold w-[150px] text-white mt-8 font-bison px-4 py-4 bg-main'>
 						SHOP NOW
-					</button>
+					</motion.button>
 				</div>
 			</section>
 
-			<section className='  md:h-auto md:mt-12 mt-6  px-8 md:px-16  font-poppins grid gap-10 md:grid-cols-2 grid-cols-1'>
-				<div className=' flex flex-col justify-center p-5'>
-					<h1 className='text-4xl md:text-5xl font-bold font-poppins text-main leading-tight'>
+			<section className='  md:h-auto md:mt-12 mt-6  px-8 md:px-16  font-bison grid gap-10 md:grid-cols-2 grid-cols-1'>
+				<motion.div
+					initial={{ opacity: 0, x: -30 }}
+					whileInView={{ opacity: 1, x: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.6 }}
+					className=' flex flex-col justify-center p-5'>
+					<h1 className='text-4xl md:text-5xl font-bold font-bison text-main leading-tight'>
 						Level Up Your Style
 					</h1>
 					<p className='mt-4 text-base  md:text-xl text-gray-700 leading-relaxed max-w-lg'>
 						Get our premium bundles designed to elevate any traditional outfit.
 						Stylish, timeless, and up to{' '}
-						<span className='font-bold text-[#982F4B]'>30% off</span>.
+						<span className='font-bold text-gold'>30% off</span>.
 					</p>
 
-					<button
+					<motion.button
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
 						onClick={() => navigate('/shop')}
-						className='mt-6 inline-block w-40 px-6 py-2 bg-[#982F4B] text-white font-medium rounded-full hover:bg-[#7c243c] transition'>
+						className='mt-6 inline-block w-40 px-6 py-2 bg-main text-white font-medium rounded-full hover:bg-main/90 transition'>
 						Shop Now
-					</button>
-				</div>
+					</motion.button>
+				</motion.div>
 
-				<div className='relative flex justify-center items-center'>
+				<motion.div
+					initial={{ opacity: 0, x: 30 }}
+					whileInView={{ opacity: 1, x: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.6, delay: 0.2 }}
+					className='relative flex justify-center items-center'>
 					<img
 						src='/SaveClip.App_481994610_18385190431136625_1014949194919151044_n.jpg'
 						alt='Styled model in agbada'
 						className='w-full h-full object-cover rounded-xl shadow-lg'
 					/>
-					<div className='absolute bottom-4 right-4 bg-white px-3 py-1 text-sm font-semibold rounded shadow text-[#982F4B]'>
+					<div className='absolute bottom-4 right-4 bg-white px-3 py-1 text-sm font-semibold rounded shadow text-gold'>
 						Signature Look
 					</div>
-				</div>
+				</motion.div>
 			</section>
 
 			<main className=' mt-8 md:mt-24'>
-				<div className=' px-12 flex justify-center items-center'>
-					<h1 className=' text-main text-center font-bold font-poppins text-5xl'>
-					Just In: Our Latest Products
+				<motion.div
+					initial={{ opacity: 0, y: 30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.6 }}
+					className=' px-12 flex justify-center items-center'>
+					<h1 className=' text-main text-center font-bold font-bison text-5xl'>
+						Just In: Our Latest Products
 					</h1>
-				</div>
+				</motion.div>
 				<div className=' mt-12  flex   w-full'>
 					<Swiper
 						onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -152,7 +169,9 @@ const HomeIndexPage = () => {
 							const { id, name, price, category, photoURLs, size, quantity } =
 								product;
 							return (
-								<SwiperSlide key={id} className='flex justify-center items-center '>
+								<SwiperSlide
+									key={id}
+									className='flex justify-center items-center '>
 									<ProductCard
 										key={id}
 										name={name}
@@ -182,7 +201,6 @@ const HomeIndexPage = () => {
 					</div>
 				</div>
 			</main>
-
 
 			<div className=' mt-24 px-8 md:px-16'>
 				<h1 className='text-4xl text-center md:text-5xl font-extrabold text-main mb-4'>
@@ -217,11 +235,9 @@ const HomeIndexPage = () => {
 				</button>
 			</section>
 
-			
-
 			{/* <main className=' mt-8 md:mt-24'>
 				<div className=' px-12 flex justify-center items-center'>
-					<h1 className=' text-main text-center font-bold font-poppins text-5xl'>
+					<h1 className=' text-main text-center font-bold font-bison text-5xl'>
 						Browse Top Selling Products
 					</h1>
 				</div>
@@ -280,7 +296,6 @@ const HomeIndexPage = () => {
 			</main> */}
 
 			<PromoBanner />
-			
 		</>
 	);
 };

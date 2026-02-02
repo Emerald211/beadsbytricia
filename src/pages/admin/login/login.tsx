@@ -68,9 +68,9 @@ const AdminLogin = () => {
   }
 
   return (
-    <section className="flex flex-col  justify-center items-center w-full h-screen px-4 font-poppins">
+    <section className="flex flex-col  justify-center items-center w-full h-screen px-4 font-bison">
       <ToastContainer />
-      <h1 className="text-main font-poppins text-2xl md:text-3xl font-bold text-center">
+      <h1 className="text-main font-bison text-2xl md:text-3xl font-bold text-center">
         BeadsbyTricia Admin
       </h1>
       <h5 className="text-xs mt-2 text-gray-400 text-center">

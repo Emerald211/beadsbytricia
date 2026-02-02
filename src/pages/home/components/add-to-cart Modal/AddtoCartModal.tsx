@@ -14,6 +14,9 @@ import { Product } from '../../../../utils/context/admin-state-context/types/Pro
 import { Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../../utils/context/user/UserContext';
+import { UserProps } from '../../../../utils/context/user/types/UserType';
+import { motion } from 'motion/react';
 
 interface LoadingComponentProps {
 	loading: boolean;
@@ -39,13 +42,13 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 	const [selectedSize, setSelectedSize] = useState<string | null>(null); // State to store the selected size
 	const { products } = useContext(AdminDashboardContext) as AdminDashboardProps;
 	const { cartItems, setCartItems } = useContext(StoreContext) as StoreProps;
+	const { user } = useContext(UserContext) as UserProps;
 	const [addLoading, setAddLoading] = useState(false);
 	// state for selected color & length
 	const [selectedColor, setSelectedColor] = useState<string | null>(null);
 	const [selectedLength, setSelectedLength] = useState<string | null>(null);
 	const [showAllColors] = useState(false);
 	const [showColorModal, setShowColorModal] = useState(false);
-	
 
 	const ColorOptions = [
 		// Basics
@@ -134,7 +137,7 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 		product: Product,
 		size: string,
 		cartItems: Cart[] | null,
-		setCartItems: Dispatch<SetStateAction<Cart[] | null>>
+		setCartItems: Dispatch<SetStateAction<Cart[] | null>>,
 	) => {
 		setAddLoading(true);
 		const newCartItem: Cart = {
@@ -151,7 +154,7 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 
 		if (cartItems) {
 			const existingItemIndex = cartItems.findIndex(
-				(item) => item.id === newCartItem.id && item.size === newCartItem.size
+				(item) => item.id === newCartItem.id && item.size === newCartItem.size,
 			);
 
 			if (existingItemIndex > -1) {
@@ -212,7 +215,7 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 						<Spin size='large' className='custom-spinner' />{' '}
 					</div>
 				) : (
-					<section className='h-auto font-poppins rounded-none flex flex-col md:flex-row'>
+					<section className='h-auto font-bison rounded-none flex flex-col md:flex-row'>
 						<div
 							style={{ backgroundImage: `url(${photoURLs && photoURLs[0]})` }}
 							className='image w-[100%] md:w-[40%] h-[350px] bg-slate-300 bg-cover bg-no-repeat relative group'></div>
@@ -221,7 +224,14 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 							<h5 className=' text-slate-300'>{category}</h5>
 							<h6>₦{price}</h6>
 
-							<a className=' underline'>View Product Details</a>
+							<a
+								onClick={() => {
+									setOpen(false);
+									navigate(`/product/${id}`);
+								}}
+								className=' underline cursor-pointer hover:text-main'>
+								View Product Details
+							</a>
 
 							<hr className=' mt-5' />
 
@@ -258,7 +268,7 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 															!product.colors.includes(selectedColor)
 																? [selectedColor]
 																: []),
-													  ]
+														]
 													: [
 															...product.colors.slice(0, 3),
 															...(selectedColor &&
@@ -267,7 +277,7 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 																.includes(selectedColor)
 																? [selectedColor]
 																: []),
-													  ]
+														]
 												).map((col: string, index: number) => (
 													<div
 														key={index}
@@ -388,7 +398,9 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 								/>
 							</div>
 
-							<button
+							<motion.button
+								whileHover={{ scale: 1.02 }}
+								whileTap={{ scale: 0.98 }}
 								onClick={() => {
 									const size = selectedSize;
 									if (size) {
@@ -397,15 +409,14 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 										alert('Please select a size.');
 									}
 								}}
-								className=' bg-main text-center font-bold text-white py-4 mt-5 flex items-center justify-center gap-2'>
-								{' '}
+								className='bg-main text-center font-bold text-white py-4 mt-5 flex items-center justify-center gap-2 hover:bg-main/90 transition-colors'>
 								{addLoading ? (
 									<Spin
-										indicator={<LoadingOutlined className=' text-white' spin />}
+										indicator={<LoadingOutlined className='text-white' spin />}
 										size='small'
 									/>
 								) : (
-									<div className=' flex items-center gap-2 justify-center'>
+									<div className='flex items-center gap-2 justify-center'>
 										<svg
 											xmlns='http://www.w3.org/2000/svg'
 											className='h-5 w-5 flex-shrink-0'
@@ -422,21 +433,29 @@ const AddtoCartModal: React.FC<AddToCartModalProps> = ({
 										<span>ADD TO CART</span>
 									</div>
 								)}
-							</button>
+							</motion.button>
 
-							<button
+							<motion.button
+								whileHover={{ scale: 1.02, backgroundColor: '#D4AF37' }}
+								whileTap={{ scale: 0.98 }}
 								onClick={() => {
 									const size = selectedSize;
 									if (size) {
+										if (!user) {
+											message.info('Please login to continue with checkout');
+											setOpen(false);
+											navigate('/login');
+											return;
+										}
 										addToCart(product, size, cartItems, setCartItems);
 										navigate('/checkout');
 									} else {
 										alert('Please select a size.');
 									}
 								}}
-								className=' bg-main text-center font-bold text-white py-4 mt-5 '>
+								className='bg-main text-center font-bold text-white py-4 mt-5 transition-colors'>
 								BUY IT NOW
-							</button>
+							</motion.button>
 						</div>
 					</section>
 				)}

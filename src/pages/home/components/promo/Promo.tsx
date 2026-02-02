@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const PromoBanner: React.FC = () => {
     const navigate = useNavigate()
 	return (
-		<div className='relative h-[60vh] font-poppins overflow-hidden bg-main text-white  shadow-xl mx-16 mb-12 rounded-lg p-8 md:p-16 mt-16 flex items-center '>
+		<div className='relative h-[60vh] font-bison overflow-hidden bg-main text-white  shadow-xl mx-16 mb-12 rounded-lg p-8 md:p-16 mt-16 flex items-center '>
 			<div className='relative z-10 flex flex-col md:flex-row items-center justify-between   md:text-left'>
 				<div className='mb-6 md:mb-0 md:mr-8'>
 					<h2 className='text-3xl md:text-4xl font-extrabold leading-tight'>

@@ -10,7 +10,7 @@ const BeadedBag = () => {
     (product) => product.category === "Beaded bags"
   );
   return (
-    <div className=" px-12 font-poppins pb-12 flex items-center justify-center flex-col">
+    <div className=" px-12 font-bison pb-12 flex items-center justify-center flex-col">
       <h1 className=" mt-12 font-bold text-3xl">Beaded bags</h1>
 
       <div className=" flex flex-wrap gap-4 p-10 m-10 items-center justify-center">

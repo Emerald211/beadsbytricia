@@ -55,31 +55,31 @@ const UsersTable: React.FC = () => {
 			title: 'FirstName',
 			dataIndex: 'firstName',
 			key: 'firstName',
-			render: (text) => <a className=" font-poppins">{text}</a>,
+			render: (text) => <a className=" font-bison">{text}</a>,
 		},
 		{
 			title: 'LastName',
 			dataIndex: 'lastName',
 			key: 'name',
-			render: (text) => <a className=" font-poppins">{text}</a>,
+			render: (text) => <a className=" font-bison">{text}</a>,
 		},
 		{
 			title: 'Email',
 			dataIndex: 'email',
 			key: 'name',
-			render: (text) => <a className=" font-poppins">{text}</a>,
+			render: (text) => <a className=" font-bison">{text}</a>,
 		},
 		{
 			title: 'Phone No',
 			dataIndex: 'phoneNo',
 			key: 'name',
-			render: (text) => <a className=" font-poppins">{text}</a>,
+			render: (text) => <a className=" font-bison">{text}</a>,
 		},
 		{
 			title: 'Date of Birth',
 			dataIndex: 'dob',
 			key: 'name',
-			render: (text) => <a className=" font-poppins">{text}</a>,
+			render: (text) => <a className=" font-bison">{text}</a>,
 		},
 		{
 			title: 'Action',
@@ -88,7 +88,7 @@ const UsersTable: React.FC = () => {
 				<Space size='middle'>
 					<Button
 						type='primary'
-						className=" font-poppins"
+						className=" font-bison"
 						danger
 						onClick={() => showDeleteConfirm(record.uid)}>
 						Inactivate Account
@@ -100,7 +100,7 @@ const UsersTable: React.FC = () => {
 
   return (
     <>
-      <div className="w-full font-poppins flex mb-5">
+      <div className="w-full font-bison flex mb-5">
         <h1 className="text-main font-bold">List of all User</h1>
         <button
           onClick={() => navigate("/admin-dashboard/product/add-new-product")}

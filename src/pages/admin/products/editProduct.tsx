@@ -201,7 +201,7 @@ const EditProduct = () => {
 			<ToastContainer transition={Bounce} />
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='w-full flex font-poppins flex-col gap-5 mt-12'
+				className='w-full flex font-bison flex-col gap-5 mt-12'
 			>
 				<Controller
 					name='name'
@@ -210,7 +210,7 @@ const EditProduct = () => {
 						<div className='flex flex-col'>
 							<label className='font-bold text-main'>Name of Product</label>
 							<Input
-								className='w-[100%] md:w-[40%] font-poppins'
+								className='w-[100%] md:w-[40%] font-bison'
 								size='large'
 								placeholder='Enter product name'
 								{...field}
@@ -227,7 +227,7 @@ const EditProduct = () => {
 							<label className='font-bold text-main'>Description</label>
 							<Input.TextArea
 								rows={4}
-								className='w-[100%] md:w-[60%] font-poppins'
+								className='w-[100%] md:w-[60%] font-bison'
 								size='large'
 								placeholder='Enter product description'
 								{...field}
@@ -243,7 +243,7 @@ const EditProduct = () => {
 						<div className='flex flex-col'>
 							<label className='font-bold text-main'>Category</label>
 							<Select
-								className='w-[100%] font-poppins md:w-[20%]'
+								className='w-[100%] font-bison md:w-[20%]'
 								size='large'
 								placeholder='Select a category'
 								{...field}
@@ -317,7 +317,7 @@ const EditProduct = () => {
 						<div className='flex flex-col'>
 							<label className='font-bold text-main'>Product for</label>
 							<Select
-								className='w-[100%] font-poppins md:w-[20%]'
+								className='w-[100%] font-bison md:w-[20%]'
 								size='large'
 								placeholder='SELECT GENDER'
 								{...field}
@@ -339,7 +339,7 @@ const EditProduct = () => {
 						<div className='flex flex-col'>
 							<label className='font-bold text-main'>Price</label>
 							<InputNumber
-								className='w-[100%] font-poppins md:w-[40%]'
+								className='w-[100%] font-bison md:w-[40%]'
 								size='large'
 								placeholder='Enter product price'
 								{...field}
@@ -355,7 +355,7 @@ const EditProduct = () => {
 						<div className='flex flex-col'>
 							<label className='font-bold text-main'>Status</label>
 							<Select
-								className='w-[100%] font-poppins md:w-[20%]'
+								className='w-[100%] font-bison md:w-[20%]'
 								size='large'
 								placeholder='Select status'
 								{...field}

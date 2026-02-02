@@ -23,7 +23,7 @@ const PopuarItems = () => {
 
 	return (
 		<div className=' px-12 mt-12 ml-12 text-main flex flex-col items-center justify-center'>
-			<h1 className=' font-serrat text-2xl font-bold flex items-start justify-start'>
+			<h1 className=' font-bison text-2xl font-bold flex items-start justify-start'>
 				Popular Items 🔥
 			</h1>
 

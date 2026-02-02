@@ -55,8 +55,9 @@ import BeadedBag from './pages/home/components/BeadedBag/BeadedBag';
 import Bridal from './pages/home/components/Bridal/Bridal';
 import ThrowOn from './pages/home/components/Statement-throwon/ThrowOn';
 import Gemstone from './pages/home/components/Gemstone/Gemstone';
+import ProductDescription from './pages/home/product/ProductDescription';
 const AdminDashboard = React.lazy(
-	() => import('./pages/admin/dashboard/dashboard')
+	() => import('./pages/admin/dashboard/dashboard'),
 );
 
 function App() {
@@ -148,7 +149,6 @@ function App() {
 
 	return (
 		<Routes>
-			
 			<Route
 				path='/'
 				element={
@@ -189,6 +189,7 @@ function App() {
 				<Route path='order-history' element={<OrderHistory />} />
 				<Route path='contact' element={<Contact />} />
 				<Route path='profile' element={<Profile />} />
+				<Route path='product/:id' element={<ProductDescription />} />
 			</Route>
 			<Route path='/admin-login' element={<AdminLogin />}></Route>
 			<Route
